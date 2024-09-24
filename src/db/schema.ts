@@ -9,7 +9,9 @@ export const accounts = pgTable("accounts", {
 });
 
 export const users = pgTable("users", {
-  userId: uuid("id").references(() => accounts.id),
+  userId: uuid("userId").references(() => accounts.id, {
+    onDelete: "cascade",
+  }),
   name: varchar("name", { length: 255 }),
   role: varchar("role").$type<UserRoleType>().default("VISITOR"),
 });

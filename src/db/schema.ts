@@ -11,6 +11,8 @@ import {
 
 export const accounts = pgTable("accounts", {
   id: uuid("id").defaultRandom().primaryKey(),
+  name: varchar("name", { length: 255 }),
+  role: varchar("role").$type<UserRoleType>().default("CUSTOMER"),
   email: varchar("email", { length: 255 }).notNull().unique(),
   password: varchar("password", { length: 255 }).notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
@@ -19,14 +21,4 @@ export const accounts = pgTable("accounts", {
   access_token: varchar("access_token", { length: 255 }),
   twoFactorAuth: boolean("twoFactorAuth").default(false),
   twoFactorAuthToken: integer("twoFactorAuthToken"),
-});
-
-export const users = pgTable("users", {
-  userId: uuid("userId")
-    .notNull()
-    .references(() => accounts.id, {
-      onDelete: "cascade",
-    }),
-  name: varchar("name", { length: 255 }),
-  role: varchar("role").$type<UserRoleType>().default("CUSTOMER"),
 });

@@ -15,6 +15,13 @@
       "when": 1727300599681,
       "tag": "0001_hot_carmella_unuscione",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1727389088403,
+      "tag": "0002_fantastic_doctor_strange",
+      "breakpoints": true
     }
   ]
 }

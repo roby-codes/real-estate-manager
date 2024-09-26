@@ -2,8 +2,8 @@ import { UserRoleType } from "@/types";
 
 import {
   boolean,
+  integer,
   pgTable,
-  smallint,
   timestamp,
   uuid,
   varchar,
@@ -15,8 +15,10 @@ export const accounts = pgTable("accounts", {
   password: varchar("password", { length: 255 }).notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   emailVerificationToken: varchar("emailVerificationToken", { length: 255 }),
+  refresh_token: varchar("refresh_token", { length: 255 }),
+  access_token: varchar("access_token", { length: 255 }),
   twoFactorAuth: boolean("twoFactorAuth").default(false),
-  twoFactorAuthToken: smallint("twoFactorAuthToken"),
+  twoFactorAuthToken: integer("twoFactorAuthToken"),
 });
 
 export const users = pgTable("users", {

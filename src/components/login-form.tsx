@@ -15,24 +15,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-
-const formSchema = z.object({
-  email: z.string().email({
-    message: "Enter a valid email.",
-  }),
-  password: z
-    .string()
-    .min(8, { message: "Enter a password with at least 8 characters." }),
-});
+import { LoginSchema, LoginFormType } from "@/schemas/login-schema";
 
 const LoginForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<LoginFormType>>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {},
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<LoginFormType>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
@@ -51,7 +43,7 @@ const LoginForm = () => {
                   Email
                 </FormLabel>
                 <FormControl>
-                  <Input placeholder="info@yourdomain.com" {...field} />
+                  <Input placeholder="info@domain.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

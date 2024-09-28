@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { LoginSchema, LoginFormType } from "@/schemas/login-schema";
+import { login } from "@/app/actions/login";
 
 const LoginForm = () => {
   const form = useForm<z.infer<LoginFormType>>({
@@ -23,11 +24,10 @@ const LoginForm = () => {
     defaultValues: {},
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<LoginFormType>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<LoginFormType>) {
+    if (!form.formState.isSubmitting) {
+      await login(values);
+    }
   }
 
   return (
